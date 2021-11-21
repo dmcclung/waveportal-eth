@@ -1,19 +1,25 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
-    await greeter.deployed();
+describe("WavePortal", function () {
+  it("should track total waves", async function () {
+    const [owner, anon] = await ethers.getSigners();
 
-    expect(await greeter.greet()).to.equal("Hello, world!");
+    const WavePortal = await ethers.getContractFactory("WavePortal");
+    const wavePortal = await WavePortal.deploy();
 
-    const setGreetingTx = await greeter.setGreeting("Hola, mundo!");
+    await wavePortal.deployed();
 
-    // wait until the transaction is mined
-    await setGreetingTx.wait();
+    expect(await wavePortal.getTotalWaves()).to.eq(0);
 
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
+    let tx = await wavePortal.wave();
+    await tx.wait();
+
+    expect(await wavePortal.getTotalWaves()).to.eq(1);
+
+    tx = await wavePortal.connect(anon).wave();
+    await tx.wait();
+
+    expect(await wavePortal.getTotalWaves()).to.eq(2);
   });
 });

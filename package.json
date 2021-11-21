@@ -6,7 +6,9 @@
   "license": "MIT",
   "scripts": {
     "compile": "hardhat compile",
-    "deploy:localhost": "hardhat run scripts/deploy.ts --network localhost"
+    "test": "hardhat test",
+    "deploy:localhost": "hardhat run scripts/deploy.ts --network localhost",
+    "deploy:rinkeby": "hardhat run scripts/deploy.ts --network rinkeby"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.0",
