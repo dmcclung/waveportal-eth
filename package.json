@@ -5,9 +5,10 @@
   "author": "dmcclung <dylanmcclung@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "clean": "hardhat clean",
     "compile": "hardhat compile",
     "test": "hardhat test",
-    "deploy:localhost": "hardhat run scripts/deploy.ts --network localhost",
+    "deploy": "hardhat run scripts/deploy.ts --network localhost",
     "deploy:rinkeby": "hardhat run scripts/deploy.ts --network rinkeby"
   },
   "devDependencies": {

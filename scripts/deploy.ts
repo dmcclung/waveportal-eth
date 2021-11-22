@@ -4,7 +4,9 @@ async function main() {
   const [deployer] = await ethers.getSigners();
 
   const WavePortal = await ethers.getContractFactory("WavePortal");
-  const wavePortal = await WavePortal.deploy();
+  const wavePortal = await WavePortal.deploy({
+    value: ethers.utils.parseEther('0.01')
+  });
 
   await wavePortal.deployed();
 
